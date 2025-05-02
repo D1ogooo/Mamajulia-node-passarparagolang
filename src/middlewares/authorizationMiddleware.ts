@@ -25,14 +25,14 @@ async function authorizationMiddleware(req: Request, res: Response, next: NextFu
 
     switch (decode.role) {
       case "admin":
+        next()
         break;
       case "user":
+        res.status(403).json({ message: "Acessso negado" })
         break;
       default:
-        return res.status(401).json({ message: "Não authorizado" })
+        return
     }
-
-
   } catch (error) {
     res.status(401).json({ message: "Não autorizado" })
   }
