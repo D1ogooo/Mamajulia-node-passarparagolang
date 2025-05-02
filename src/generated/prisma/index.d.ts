@@ -2646,7 +2646,7 @@ export namespace Prisma {
     description: string
     ingredients: string[]
     price: number
-    status: $Enums.StatusPrato
+    status: $Enums.StatusPrato | null
     createdAt: Date
     updatedAt: Date
     _count: PratoCountAggregateOutputType | null
@@ -2740,7 +2740,7 @@ export namespace Prisma {
       description: string
       ingredients: string[]
       price: number
-      status: $Enums.StatusPrato
+      status: $Enums.StatusPrato | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["prato"]>
@@ -6810,6 +6810,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -6977,7 +6985,7 @@ export namespace Prisma {
     description?: StringFilter<"Prato"> | string
     ingredients?: StringNullableListFilter<"Prato">
     price?: FloatFilter<"Prato"> | number
-    status?: EnumStatusPratoFilter<"Prato"> | $Enums.StatusPrato
+    status?: EnumStatusPratoNullableFilter<"Prato"> | $Enums.StatusPrato | null
     createdAt?: DateTimeFilter<"Prato"> | Date | string
     updatedAt?: DateTimeFilter<"Prato"> | Date | string
     CartItem?: CartItemListRelationFilter
@@ -6990,7 +6998,7 @@ export namespace Prisma {
     description?: SortOrder
     ingredients?: SortOrder
     price?: SortOrder
-    status?: SortOrder
+    status?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     CartItem?: CartItemOrderByRelationAggregateInput
@@ -7006,7 +7014,7 @@ export namespace Prisma {
     description?: StringFilter<"Prato"> | string
     ingredients?: StringNullableListFilter<"Prato">
     price?: FloatFilter<"Prato"> | number
-    status?: EnumStatusPratoFilter<"Prato"> | $Enums.StatusPrato
+    status?: EnumStatusPratoNullableFilter<"Prato"> | $Enums.StatusPrato | null
     createdAt?: DateTimeFilter<"Prato"> | Date | string
     updatedAt?: DateTimeFilter<"Prato"> | Date | string
     CartItem?: CartItemListRelationFilter
@@ -7019,7 +7027,7 @@ export namespace Prisma {
     description?: SortOrder
     ingredients?: SortOrder
     price?: SortOrder
-    status?: SortOrder
+    status?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PratoCountOrderByAggregateInput
@@ -7039,7 +7047,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Prato"> | string
     ingredients?: StringNullableListFilter<"Prato">
     price?: FloatWithAggregatesFilter<"Prato"> | number
-    status?: EnumStatusPratoWithAggregatesFilter<"Prato"> | $Enums.StatusPrato
+    status?: EnumStatusPratoNullableWithAggregatesFilter<"Prato"> | $Enums.StatusPrato | null
     createdAt?: DateTimeWithAggregatesFilter<"Prato"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Prato"> | Date | string
   }
@@ -7271,7 +7279,7 @@ export namespace Prisma {
     description: string
     ingredients?: PratoCreateingredientsInput | string[]
     price: number
-    status?: $Enums.StatusPrato
+    status?: $Enums.StatusPrato | null
     createdAt?: Date | string
     updatedAt?: Date | string
     CartItem?: CartItemCreateNestedManyWithoutPratoInput
@@ -7284,7 +7292,7 @@ export namespace Prisma {
     description: string
     ingredients?: PratoCreateingredientsInput | string[]
     price: number
-    status?: $Enums.StatusPrato
+    status?: $Enums.StatusPrato | null
     createdAt?: Date | string
     updatedAt?: Date | string
     CartItem?: CartItemUncheckedCreateNestedManyWithoutPratoInput
@@ -7297,7 +7305,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: PratoUpdateingredientsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
-    status?: EnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato
+    status?: NullableEnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     CartItem?: CartItemUpdateManyWithoutPratoNestedInput
@@ -7310,7 +7318,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: PratoUpdateingredientsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
-    status?: EnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato
+    status?: NullableEnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     CartItem?: CartItemUncheckedUpdateManyWithoutPratoNestedInput
@@ -7323,7 +7331,7 @@ export namespace Prisma {
     description: string
     ingredients?: PratoCreateingredientsInput | string[]
     price: number
-    status?: $Enums.StatusPrato
+    status?: $Enums.StatusPrato | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7335,7 +7343,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: PratoUpdateingredientsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
-    status?: EnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato
+    status?: NullableEnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7347,7 +7355,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: PratoUpdateingredientsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
-    status?: EnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato
+    status?: NullableEnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7620,17 +7628,22 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type EnumStatusPratoFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusPrato | EnumStatusPratoFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusPratoFilter<$PrismaModel> | $Enums.StatusPrato
+  export type EnumStatusPratoNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPrato | EnumStatusPratoFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatusPratoNullableFilter<$PrismaModel> | $Enums.StatusPrato | null
   }
 
   export type CartItemListRelationFilter = {
     every?: CartItemWhereInput
     some?: CartItemWhereInput
     none?: CartItemWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type CartItemOrderByRelationAggregateInput = {
@@ -7695,14 +7708,14 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type EnumStatusPratoWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusPrato | EnumStatusPratoFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusPratoWithAggregatesFilter<$PrismaModel> | $Enums.StatusPrato
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusPratoFilter<$PrismaModel>
-    _max?: NestedEnumStatusPratoFilter<$PrismaModel>
+  export type EnumStatusPratoNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPrato | EnumStatusPratoFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatusPratoNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatusPrato | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatusPratoNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatusPratoNullableFilter<$PrismaModel>
   }
 
   export type PedidosConcluidosCountOrderByAggregateInput = {
@@ -7902,8 +7915,8 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type EnumStatusPratoFieldUpdateOperationsInput = {
-    set?: $Enums.StatusPrato
+  export type NullableEnumStatusPratoFieldUpdateOperationsInput = {
+    set?: $Enums.StatusPrato | null
   }
 
   export type CartItemUpdateManyWithoutPratoNestedInput = {
@@ -8121,11 +8134,11 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumStatusPratoFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusPrato | EnumStatusPratoFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusPratoFilter<$PrismaModel> | $Enums.StatusPrato
+  export type NestedEnumStatusPratoNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPrato | EnumStatusPratoFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatusPratoNullableFilter<$PrismaModel> | $Enums.StatusPrato | null
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -8144,14 +8157,25 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedEnumStatusPratoWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusPrato | EnumStatusPratoFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusPratoWithAggregatesFilter<$PrismaModel> | $Enums.StatusPrato
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusPratoFilter<$PrismaModel>
-    _max?: NestedEnumStatusPratoFilter<$PrismaModel>
+  export type NestedEnumStatusPratoNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPrato | EnumStatusPratoFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatusPrato[] | ListEnumStatusPratoFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatusPratoNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatusPrato | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatusPratoNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatusPratoNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8378,7 +8402,7 @@ export namespace Prisma {
     description: string
     ingredients?: PratoCreateingredientsInput | string[]
     price: number
-    status?: $Enums.StatusPrato
+    status?: $Enums.StatusPrato | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8390,7 +8414,7 @@ export namespace Prisma {
     description: string
     ingredients?: PratoCreateingredientsInput | string[]
     price: number
-    status?: $Enums.StatusPrato
+    status?: $Enums.StatusPrato | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8439,7 +8463,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: PratoUpdateingredientsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
-    status?: EnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato
+    status?: NullableEnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8451,7 +8475,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: PratoUpdateingredientsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
-    status?: EnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato
+    status?: NullableEnumStatusPratoFieldUpdateOperationsInput | $Enums.StatusPrato | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

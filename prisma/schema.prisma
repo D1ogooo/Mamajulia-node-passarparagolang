@@ -27,16 +27,17 @@ model User {
 }
 
 model Prato {
-  id          String      @id @default(cuid())
+  id          String       @id @default(cuid())
   image       String
   name        String
   description String
   ingredients String[]
   price       Float
-  status      StatusPrato @default(PENDENTE_PARA_PREPARO)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  CartItem    CartItem[]
+  status      StatusPrato? @default(INATIVO)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  CartItem CartItem[]
 }
 
 model PedidosConcluidos {

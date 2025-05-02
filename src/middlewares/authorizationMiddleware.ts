@@ -4,7 +4,7 @@ import type { NextFunction, Request, Response } from "express";
 import { jwtConfig } from '../configs/auth';
 dotenv.config()
 
-async function authorizationMiddleware(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+async function authorizationMiddleware(req: Request, res: Response, next: NextFunction): Promise<Response | any> {
   const authHeader = req.headers.authorization;
   const token = authHeader?.split(' ')[1];
 
@@ -13,7 +13,7 @@ async function authorizationMiddleware(req: Request, res: Response, next: NextFu
   }
 
   try {
-    const decode = jwt.verify(token, jwtConfig.secretJWT as string, (error, payload) => {
+    const decode = jwt.verify(token, jwtConfig.secretJWT as string, (error: any, payload: any) => {
       if (error) {
         return res.status(401).json({ message: "Token inválido" });
       }
@@ -25,10 +25,10 @@ async function authorizationMiddleware(req: Request, res: Response, next: NextFu
     // }
 
     switch (decode.role) {
-      case "admin":
+      case "ADMIN":
         next()
         break;
-      case "user":
+      case "USER":
         res.status(403).json({ message: "Acessso negado" })
         break;
       default:
