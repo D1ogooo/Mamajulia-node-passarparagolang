@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import type { NextFunction, Request, Response } from "express";
 import dotenv from 'dotenv'
+import { jwtConfig } from '../configs/auth';
 dotenv.config()
 
 async function authMiddleware(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
@@ -12,7 +13,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction): 
   }
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET as string);
+    jwt.verify(token, jwtConfig.secretJWT as string);
     next();
   } catch (error) {
     return res.status(401).json({ message: 'Não autorizado' });

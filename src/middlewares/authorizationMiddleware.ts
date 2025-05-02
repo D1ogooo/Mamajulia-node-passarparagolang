@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
-import type { NextFunction, Request, Response } from "express";
 import dotenv from 'dotenv'
+import type { NextFunction, Request, Response } from "express";
+import { jwtConfig } from '../configs/auth';
 dotenv.config()
 
 async function authorizationMiddleware(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
@@ -12,7 +13,7 @@ async function authorizationMiddleware(req: Request, res: Response, next: NextFu
   }
 
   try {
-    const decode = jwt.verify(token, process.env.JWT_SECRET as string, (error, payload) => {
+    const decode = jwt.verify(token, jwtConfig.secretJWT as string, (error, payload) => {
       if (error) {
         return res.status(401).json({ message: "Token inválido" });
       }

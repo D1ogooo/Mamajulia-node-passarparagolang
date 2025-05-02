@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      UserRole @default(USER)
+
+  Cart Cart[]
+}
+
+model Prato {
+  id          String      @id @default(cuid())
+  image       String
+  name        String
+  description String
+  ingredients String[]
+  price       Float
+  status      StatusPrato @default(PENDENTE_PARA_PREPARO)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  CartItem    CartItem[]
+}
+
+model PedidosConcluidos {
+  id      String   @id @default(cuid())
+  prato   String
+  usuario String
+  data    DateTime @default(now())
+}
+
+model Cart {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  items CartItem[]
+}
+
+model CartItem {
+  id       String @id @default(uuid())
+  cartId   String
+  cart     Cart   @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  prato    Prato  @relation(fields: [pratoId], references: [id])
+  pratoId  String
+  quantity Int    @default(1)
+
+  @@unique([cartId, pratoId])
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum StatusPrato {
+  INATIVO // quando o prato não foi pedido ainda
+  PENDENTE_PARA_PREPARO // quando o prato foi pedido e está aguardando o preparo
+  EM_PREPARO // quando o prato está sendo preparado
+  PRONTO_PARA_RETIRAR // quando o prato está pronto para ser retirado para consumo
+  RETIRADO // quando o prato foi retirado pelo cliente
+  CANCELADO // quando o prato foi cancelado pelo cliente
+}
