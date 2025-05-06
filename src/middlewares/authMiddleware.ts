@@ -13,10 +13,12 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction): 
   }
 
   try {
+    console.log(token)
     jwt.verify(token, jwtConfig.secretJWT as string);
     next();
   } catch (error) {
-    return res.status(401).json({ message: 'Não autorizado' });
+    // return res.status(401).json({ message: 'Não autorizado' });
+    console.log(error)
   }
 }
 

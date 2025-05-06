@@ -15,7 +15,7 @@ router.post('/auth/signup', userController.signUp.bind(userController));
 
 // Pratos
 router.post('/pratos/create', [authMiddleware, authorizationMiddleware], pratosController.create)
-// router.post('/pratos/create', pratosController.create)
+// router.post('/pratos/create', [authMiddleware, ], pratosController.create)
 // router.post('/pratos/read', [authMiddleware, authorizationMiddleware], pratosController.read)
 // router.put('/pratos/update', [authMiddleware, authorizationMiddleware], pratosController.update)
 // router.delete('/pratos/delete', [authMiddleware, authorizationMiddleware], pratosController.delete)
