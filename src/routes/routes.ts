@@ -1,20 +1,24 @@
-import express from 'express'
-const router = express.Router()
-import { UsersControllers } from '../controllers/UserController'
-import { pratosControllers } from '../controllers/PratosController'
+import express from "express";
+const router = express.Router();
+import { UsersControllers } from "../controllers/UserController";
+import { pratosControllers } from "../controllers/PratosController";
 
-import { authMiddleware } from '../middlewares/authMiddleware'
-import { authorizationMiddleware } from '../middlewares/authorizationMiddleware'
+import { authMiddleware } from "../middlewares/authMiddleware";
+import { authorizationMiddleware } from "../middlewares/authorizationMiddleware";
 
 const userController = new UsersControllers();
-const pratosController = new pratosControllers()
+const pratosController = new pratosControllers();
 
 // Authenticação
-router.post('/auth/signin', userController.signIn.bind(userController));
-router.post('/auth/signup', userController.signUp.bind(userController));
+router.post("/auth/signin", userController.signIn.bind(userController));
+router.post("/auth/signup", userController.signUp.bind(userController));
 
 // Pratos
-router.post('/pratos/create', [authMiddleware, authorizationMiddleware], pratosController.create)
+router.post(
+	"/pratos/create",
+	[authMiddleware, authorizationMiddleware],
+	pratosController.create,
+);
 // router.post('/pratos/create', [authMiddleware, ], pratosController.create)
 // router.post('/pratos/read', [authMiddleware, authorizationMiddleware], pratosController.read)
 // router.put('/pratos/update', [authMiddleware, authorizationMiddleware], pratosController.update)
@@ -23,4 +27,4 @@ router.post('/pratos/create', [authMiddleware, authorizationMiddleware], pratosC
 // Pedidos
 // router.post('/pedido/create', [authMiddleware, authorizationMiddleware], pratosController.create)
 
-export { router }
+export { router };

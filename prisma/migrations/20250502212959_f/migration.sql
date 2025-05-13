@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Prato" ALTER COLUMN "status" DROP NOT NULL,
-ALTER COLUMN "status" SET DEFAULT 'INATIVO';

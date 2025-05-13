@@ -1,21 +1,8 @@
 import type { Request, Response } from "express";
 
 class pedidosControllers {
-  async create(req: Request, res: Response) {
+	async create(req: Request, res: Response) {}
 
-  }
-
-  async read(req: Request, res: Response) {
-
-  }
-
-  async update(req: Request, res: Response) {
-
-  }
-
-  async delete(req: Request, res: Response) {
-
-  }
+	async read(req: Request, res: Response) {}
 }
-
-export { pedidosControllers }
+export { pedidosControllers };

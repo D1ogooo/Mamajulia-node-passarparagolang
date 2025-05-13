@@ -180,7 +180,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Cliente\\Desktop\\Mamajulia (node)\\src\\generated\\prisma",
+      "value": "/home/diogo/Área de Trabalho/Alias/Mamajulia-node-passarparagolang/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -189,12 +189,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-1.1.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Cliente\\Desktop\\Mamajulia (node)\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/diogo/Área de Trabalho/Alias/Mamajulia-node-passarparagolang/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -212,12 +212,12 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://mamajuliaDB_owner:npg_7klSamXyv4wV@ep-still-bonus-a4m2mjeu-pooler.us-east-1.aws.neon.tech/mamajuliaDB?sslmode=require"
+        "value": "postgresql://postgres:88490495@db.bwejzqbyspqvjzxjqqvd.supabase.co:5432/postgres"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  name      String\n  email     String   @unique\n  password  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  role      UserRole @default(USER)\n\n  Cart Cart[]\n}\n\nmodel Prato {\n  id          String       @id @default(cuid())\n  image       String\n  name        String\n  description String\n  ingredients String[]\n  price       Float\n  status      StatusPrato? @default(INATIVO)\n  createdAt   DateTime     @default(now())\n  updatedAt   DateTime     @updatedAt\n  CartItem    CartItem[]\n}\n\nmodel PedidosConcluidos {\n  id      String   @id @default(cuid())\n  prato   String\n  usuario String\n  data    DateTime @default(now())\n}\n\nmodel Cart {\n  id     String @id @default(uuid())\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  items CartItem[]\n}\n\nmodel CartItem {\n  id       String @id @default(uuid())\n  cartId   String\n  cart     Cart   @relation(fields: [cartId], references: [id], onDelete: Cascade)\n  prato    Prato  @relation(fields: [pratoId], references: [id])\n  pratoId  String\n  quantity Int    @default(1)\n\n  @@unique([cartId, pratoId])\n}\n\nenum UserRole {\n  USER\n  ADMIN\n}\n\nenum StatusPrato {\n  INATIVO // quando o prato não foi pedido ainda\n  PENDENTE_PARA_PREPARO // quando o prato foi pedido e está aguardando o preparo\n  EM_PREPARO // quando o prato está sendo preparado\n  PRONTO_PARA_RETIRAR // quando o prato está pronto para ser retirado para consumo\n  RETIRADO // quando o prato foi retirado pelo cliente\n  CANCELADO // quando o prato foi cancelado pelo cliente\n}\n",
-  "inlineSchemaHash": "f64dabebcf4d70ab4c226058904fdcacf3c179a787c8b8dd9eddee021be3b967",
+  "inlineSchema": "// learn more about it in the docs: https://pris.ly/d/prisma-schema\n// This is your Prisma schema file,\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  name      String\n  email     String   @unique\n  password  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  role      UserRole @default(USER)\n\n  Cart Cart[]\n}\n\nmodel Prato {\n  id          String       @id @default(cuid())\n  image       String\n  name        String\n  description String\n  ingredients String[]\n  price       Float\n  status      StatusPrato? @default(INATIVO)\n  createdAt   DateTime     @default(now())\n  updatedAt   DateTime     @updatedAt\n\n  CartItem CartItem[]\n}\n\nmodel PedidosConcluidos {\n  id      String   @id @default(cuid())\n  prato   String\n  usuario String\n  data    DateTime @default(now())\n}\n\nmodel Cart {\n  id     String @id @default(uuid())\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  items CartItem[]\n}\n\nmodel CartItem {\n  id       String @id @default(uuid())\n  cartId   String\n  cart     Cart   @relation(fields: [cartId], references: [id], onDelete: Cascade)\n  prato    Prato  @relation(fields: [pratoId], references: [id])\n  pratoId  String\n  quantity Int    @default(1)\n\n  @@unique([cartId, pratoId])\n}\n\nenum UserRole {\n  USER\n  ADMIN\n}\n\nenum StatusPrato {\n  INATIVO // quando o prato não foi pedido ainda\n  PENDENTE_PARA_PREPARO // quando o prato foi pedido e está aguardando o preparo\n  EM_PREPARO // quando o prato está sendo preparado\n  PRONTO_PARA_RETIRAR // quando o prato está pronto para ser retirado para consumo\n  RETIRADO // quando o prato foi retirado pelo cliente\n  CANCELADO // quando o prato foi cancelado pelo cliente\n}\n",
+  "inlineSchemaHash": "466bdde85214eed8b9fa3fb504eb98dbf461b5f07f1338455ed5b9b401897359",
   "copyEngine": true
 }
 
@@ -256,8 +256,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
+path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node");
+path.join(process.cwd(), "src/generated/prisma/libquery_engine-debian-openssl-1.1.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "src/generated/prisma/schema.prisma")
