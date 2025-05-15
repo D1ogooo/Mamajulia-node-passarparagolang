@@ -8,7 +8,7 @@ async function authorizationMiddleware(
 	req: Request,
 	res: Response,
 	next: NextFunction,
-): Promise<Response | any> {
+): Promise<any> {
 	const authHeader = req.headers.authorization;
 	const token = authHeader?.split(" ")[1];
 
@@ -17,16 +17,9 @@ async function authorizationMiddleware(
 	}
 
 	try {
-		const decode = jwt.verify(
-			token,
-			jwtConfig.secretJWT as string,
-			(error: any, payload: any) => {
-				if (error) {
-					return res.status(401).json({ message: "Token inválido" });
-				}
-				return payload; // retorna os dados codificados do token
-			},
-		) as unknown as { role: string };
+		const decode = jwt.verify(token, jwtConfig.secretJWT as string) as {
+			role: string;
+		};
 
 		switch (decode.role) {
 			case "ADMIN":

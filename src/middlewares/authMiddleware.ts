@@ -8,7 +8,7 @@ async function authMiddleware(
 	req: Request,
 	res: Response,
 	next: NextFunction,
-): Promise<Response | void> {
+): Promise<any> {
 	const authHeader = req.headers.authorization;
 	const token = authHeader?.split(" ")[1];
 

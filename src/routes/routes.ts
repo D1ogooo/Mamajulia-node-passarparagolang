@@ -5,6 +5,7 @@ import { pratosControllers } from "../controllers/PratosController";
 
 import { authMiddleware } from "../middlewares/authMiddleware";
 import { authorizationMiddleware } from "../middlewares/authorizationMiddleware";
+import { upload } from "../configs/cloudconfig";
 
 const userController = new UsersControllers();
 const pratosController = new pratosControllers();
@@ -17,12 +18,28 @@ router.post("/auth/signup", userController.signUp.bind(userController));
 router.post(
 	"/pratos/create",
 	[authMiddleware, authorizationMiddleware],
-	pratosController.create,
+	upload.single("image"),
+	pratosController.create.bind(pratosController),
 );
-// router.post('/pratos/create', [authMiddleware, ], pratosController.create)
-// router.post('/pratos/read', [authMiddleware, authorizationMiddleware], pratosController.read)
-// router.put('/pratos/update', [authMiddleware, authorizationMiddleware], pratosController.update)
-// router.delete('/pratos/delete', [authMiddleware, authorizationMiddleware], pratosController.delete)
+
+router.get(
+	"/pratos/list",
+	[authMiddleware, authorizationMiddleware],
+	pratosController.list.bind(pratosController),
+);
+
+router.put(
+	"/pratos/update/:id",
+	[authMiddleware, authorizationMiddleware],
+	upload.single("image"),
+	pratosController.update,
+);
+
+router.delete(
+	"/pratos/delete/:id",
+	[authMiddleware, authorizationMiddleware],
+	pratosController.delete,
+);
 
 // Pedidos
 // router.post('/pedido/create', [authMiddleware, authorizationMiddleware], pratosController.create)
