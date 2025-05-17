@@ -6,17 +6,18 @@ class pratosControllers {
 	async create(req: Request, res: Response): Promise<Prato | any> {
 		const { name, description, ingredients, price, status } = req.body;
 
+		const parsedIngredients = JSON.parse(ingredients);
+
 		const image = req.file?.path;
 
-		if (!image || !name || !description || !ingredients || !price || !status) {
-			// console.log("Campos recebidos:", {
-			// 	image,
-			// 	name,
-			// 	description,
-			// 	ingredients,
-			// 	price,
-			// 	status,
-			// });
+		if (!image || !name || !description || !ingredients || !price) {
+			console.log("Campos recebidos:", {
+				image,
+				name,
+				description,
+				ingredients,
+				price,
+			});
 			return res.status(400).json({
 				message: "Todos os campos são obrigatórios",
 			});
@@ -30,12 +31,12 @@ class pratosControllers {
 		try {
 			await prisma.prato.create({
 				data: {
-					image: "https://github.com/D1ogooo",
+					image,
 					name,
 					description,
-					ingredients,
-					price,
-					status,
+					ingredients: parsedIngredients,
+					price: Number(price),
+					status: "INATIVO",
 				},
 			});
 
