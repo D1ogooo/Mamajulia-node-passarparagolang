@@ -4,12 +4,10 @@ import prisma from "../lib/prisma";
 import { jwtConfig } from "../configs/auth";
 import type { Request, Response } from "express";
 import type { SignInType, SignUpType } from "../@types/AuthTypes";
+import type { User } from "../generated/prisma";
 
 class UsersControllers {
-	async signIn(
-		req: Request<any, any, SignInType>,
-		res: Response,
-	): Promise<any> {
+	async signIn(req: Request, res: Response): Promise<User | any> {
 		const { email, password } = req.body;
 
 		if (!email || !password) {
@@ -42,10 +40,7 @@ class UsersControllers {
 		});
 	}
 
-	async signUp(
-		req: Request<any, any, SignUpType>,
-		res: Response,
-	): Promise<any> {
+	async signUp(req: Request<SignUpType>, res: Response): Promise<User | any> {
 		const { name, email, password } = req.body;
 
 		if (!name || !email || !password) {

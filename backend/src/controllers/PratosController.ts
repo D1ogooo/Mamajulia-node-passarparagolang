@@ -1,8 +1,9 @@
 import type { Request, Response } from "express";
+import type { Prato } from "../generated/prisma";
 import prisma from "../lib/prisma";
 
 class pratosControllers {
-	async create(req: Request, res: Response): Promise<Response | any> {
+	async create(req: Request, res: Response): Promise<Prato | any> {
 		const { name, description, ingredients, price, status } = req.body;
 
 		const image = req.file?.path;
@@ -29,7 +30,7 @@ class pratosControllers {
 		try {
 			await prisma.prato.create({
 				data: {
-					image,
+					image: "https://github.com/D1ogooo",
 					name,
 					description,
 					ingredients,
@@ -47,17 +48,17 @@ class pratosControllers {
 		}
 	}
 
-	async list(req: Request, res: Response): Promise<Response | any> {
+	async list(req: Request, res: Response): Promise<Prato | any> {
 		try {
 			const publicItens = await prisma.prato.findMany();
 			return res.status(200).json(publicItens);
 		} catch (error) {
-			res.status(500).json({ error: "falha ao listar usuários" });
+			return res.status(500).json({ error: "falha ao listar usuários" });
 			//console.log(error)
 		}
 	}
 
-	async update(req: Request, res: Response): Promise<Response | any> {
+	async update(req: Request, res: Response): Promise<Prato | any> {
 		try {
 			const { id } = req.params;
 			const { name, description, ingredients, price, status } = req.body;
@@ -100,7 +101,7 @@ class pratosControllers {
 		}
 	}
 
-	async delete(req: Request, res: Response): Promise<Response | any> {
+	async delete(req: Request, res: Response): Promise<Prato | any> {
 		try {
 			const { id } = req.params;
 
@@ -115,9 +116,11 @@ class pratosControllers {
 
 			// falta fazer a logica para deletar do cloudinary
 
-			res.status(200).json({ "sucesso!": "comida deletada com sucesso!" });
+			return res
+				.status(200)
+				.json({ "sucesso!": "comida deletada com sucesso!" });
 		} catch (error) {
-			res.status(500).json({ error: "Erro ao deletar produto" });
+			return res.status(500).json({ error: "Erro ao deletar produto" });
 		}
 	}
 }

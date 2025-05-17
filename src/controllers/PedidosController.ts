@@ -1,8 +1,0 @@
-import type { Request, Response } from "express";
-
-class pedidosControllers {
-	async create(req: Request, res: Response) {}
-
-	async read(req: Request, res: Response) {}
-}
-export { pedidosControllers };

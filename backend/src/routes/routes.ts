@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 import { UsersControllers } from "../controllers/UserController";
 import { pratosControllers } from "../controllers/PratosController";
+import { pedidosControllers } from "../controllers/PedidosController";
 
 import { authMiddleware } from "../middlewares/authMiddleware";
 import { authorizationMiddleware } from "../middlewares/authorizationMiddleware";
@@ -9,6 +10,7 @@ import { upload } from "../configs/cloudconfig";
 
 const userController = new UsersControllers();
 const pratosController = new pratosControllers();
+const pedidosController = new pedidosControllers();
 
 // Authenticação
 router.post("/auth/signin", userController.signIn.bind(userController));
@@ -41,7 +43,11 @@ router.delete(
 	pratosController.delete,
 );
 
-// Pedidos
-// router.post('/pedido/create', [authMiddleware, authorizationMiddleware], pratosController.create)
+// Pedidos;
+router.post(
+	"/pedido/create",
+	[authMiddleware],
+	pedidosController.create.bind(pedidosController),
+);
 
 export { router };

@@ -142,11 +142,17 @@ exports.Prisma.PratoScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.PedidosConcluidosScalarFieldEnum = {
+exports.Prisma.PedidoScalarFieldEnum = {
   id: 'id',
-  prato: 'prato',
-  usuario: 'usuario',
-  data: 'data'
+  userId: 'userId'
+};
+
+exports.Prisma.PedidoItemsScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  pedidoId: 'pedidoId',
+  pratoId: 'pratoId',
+  quantity: 'quantity'
 };
 
 exports.Prisma.CartScalarFieldEnum = {
@@ -192,7 +198,8 @@ exports.StatusPrato = exports.$Enums.StatusPrato = {
 exports.Prisma.ModelName = {
   User: 'User',
   Prato: 'Prato',
-  PedidosConcluidos: 'PedidosConcluidos',
+  Pedido: 'Pedido',
+  PedidoItems: 'PedidoItems',
   Cart: 'Cart',
   CartItem: 'CartItem'
 };
